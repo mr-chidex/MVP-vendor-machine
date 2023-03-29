@@ -11,19 +11,24 @@ import {
 
 import { Product } from './products.entity';
 
+export enum ROLE {
+  BUYER = 'seller',
+  SELLER = 'buyer',
+}
+
 @Entity('users')
 @Unique(['username'])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: 0 })
   deposit: number;
 
   @Column()
@@ -35,11 +40,11 @@ export class User extends BaseEntity {
   })
   products: Product[];
 
-  @Column()
+  @Column({ name: 'created_at' })
   @CreateDateColumn()
   createdAt: Date;
 
   @Column()
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
