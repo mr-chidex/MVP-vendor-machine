@@ -12,3 +12,8 @@ export interface DB {
   DB_DB_NAME: string;
   synchronize: boolean;
 }
+
+export interface JWT {
+  secret: string;
+  expiresIn: string;
+}

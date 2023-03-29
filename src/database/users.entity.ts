@@ -34,6 +34,9 @@ export class User extends BaseEntity {
   @Column()
   role: string;
 
+  @Column({ nullable: true })
+  token: string;
+
   @OneToMany(() => Product, (product) => product.user, {
     eager: true,
     cascade: true,
