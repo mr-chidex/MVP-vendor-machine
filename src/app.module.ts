@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { DepositModule } from './deposit/deposit.module';
 import { ResetModule } from './reset/reset.module';
 import { ProductModule } from './products/products.module';
+import { BuyModule } from './buy/buy.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProductModule } from './products/products.module';
     DepositModule,
     ResetModule,
     ProductModule,
+    BuyModule,
   ],
   controllers: [],
   providers: [],
