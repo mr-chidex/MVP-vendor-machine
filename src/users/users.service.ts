@@ -25,4 +25,23 @@ export class UsersService {
       .create({ username, password: hashPass, role })
       .save();
   }
+
+  async getProfile(user: User) {
+    return user;
+  }
+
+  async updateProfile(user: User, userDetails: RegisterAuthDto) {
+    const { role } = userDetails;
+
+    user.role = role;
+    await user.save();
+
+    return user;
+  }
+
+  async deleteAccount(user: User) {
+    await user.remove();
+
+    return { message: 'account successfully deleted' };
+  }
 }
