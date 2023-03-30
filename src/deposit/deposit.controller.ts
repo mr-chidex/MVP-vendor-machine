@@ -15,13 +15,13 @@ import { User } from '../database/users.entity';
 @Controller('deposit')
 @UseGuards(AuthGuard())
 export class DepositController {
-  constructor(private authService: DepositService) {}
+  constructor(private depositService: DepositService) {}
 
   @Post()
   deposit(
     @GetUser() user: User,
     @Body(ValidationPipe) depositDetails: DepositDto,
   ) {
-    return this.authService.depositCoin(user, depositDetails);
+    return this.depositService.depositCoin(user, depositDetails);
   }
 }

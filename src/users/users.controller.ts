@@ -17,17 +17,17 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private authService: UsersService) {}
+  constructor(private userService: UsersService) {}
 
   @Post()
   register(@Body(ValidationPipe) userCredentials: RegisterAuthDto) {
-    return this.authService.signup(userCredentials);
+    return this.userService.signup(userCredentials);
   }
 
   @Get()
   @UseGuards(AuthGuard())
   profile(@GetUser() user: User) {
-    return this.authService.getProfile(user);
+    return this.userService.getProfile(user);
   }
 
   @Patch()
@@ -36,12 +36,12 @@ export class UsersController {
     @GetUser() user: User,
     @Body(ValidationPipe) updateDetails: UpdateDto,
   ) {
-    return this.authService.updateProfile(user, updateDetails);
+    return this.userService.updateProfile(user, updateDetails);
   }
 
   @Delete()
   @UseGuards(AuthGuard())
   delete(@GetUser() user: User) {
-    return this.authService.deleteAccount(user);
+    return this.userService.deleteAccount(user);
   }
 }

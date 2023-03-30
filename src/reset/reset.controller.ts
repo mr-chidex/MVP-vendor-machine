@@ -8,10 +8,10 @@ import { User } from '../database/users.entity';
 @Controller('reset')
 @UseGuards(AuthGuard())
 export class ResetController {
-  constructor(private authService: ResetService) {}
+  constructor(private resetService: ResetService) {}
 
   @Post()
   reset(@GetUser() user: User) {
-    return this.authService.resetDeposit(user);
+    return this.resetService.resetDeposit(user);
   }
 }
