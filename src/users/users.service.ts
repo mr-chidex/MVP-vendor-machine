@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { RegisterAuthDto } from './dto';
+import { RegisterAuthDto, UpdateDto } from './dto';
 import { User } from '../database/users.entity';
 
 @Injectable()
@@ -30,8 +30,8 @@ export class UsersService {
     return user;
   }
 
-  async updateProfile(user: User, userDetails: RegisterAuthDto) {
-    const { role } = userDetails;
+  async updateProfile(user: User, updateDetails: UpdateDto) {
+    const { role } = updateDetails;
 
     user.role = role;
     await user.save();

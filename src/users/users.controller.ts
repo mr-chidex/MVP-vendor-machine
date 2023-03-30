@@ -12,7 +12,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { User } from '../database/users.entity';
 import { GetUser } from '../auth/decorators';
-import { RegisterAuthDto } from './dto';
+import { RegisterAuthDto, UpdateDto } from './dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -34,12 +34,13 @@ export class UsersController {
   @UseGuards(AuthGuard())
   update(
     @GetUser() user: User,
-    @Body(ValidationPipe) userCredentials: RegisterAuthDto,
+    @Body(ValidationPipe) updateDetails: UpdateDto,
   ) {
-    return this.authService.updateProfile(user, userCredentials);
+    return this.authService.updateProfile(user, updateDetails);
   }
 
   @Delete()
+  @UseGuards(AuthGuard())
   delete(@GetUser() user: User) {
     return this.authService.deleteAccount(user);
   }
