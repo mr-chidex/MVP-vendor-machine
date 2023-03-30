@@ -16,10 +16,10 @@ export class Product extends BaseEntity {
   id: number;
 
   @Column()
-  amountAvailable: string;
+  amountAvailable: number;
 
   @Column()
-  cost: string;
+  cost: number;
 
   @Column()
   productName: string;
