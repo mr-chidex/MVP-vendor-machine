@@ -11,7 +11,7 @@ import { User } from '../database/users.entity';
 import { BuyService } from './buy.service';
 import { BuyDto } from './dto';
 
-describe.skip('BuyService', () => {
+describe('BuyService', () => {
   let buyService: BuyService;
   let productRepository: any;
 
@@ -81,7 +81,6 @@ describe.skip('BuyService', () => {
       const user = {
         username: 'test',
         password: 'test123',
-        role: 'seller',
         deposit: 0,
       } as User;
 
@@ -93,6 +92,24 @@ describe.skip('BuyService', () => {
       expect(buyService.buyAction(user, product, 1)).rejects.toThrow(
         BadRequestException,
       );
+    });
+
+    it('should return array containing amount, user deposit and productName', async () => {
+      const user = {
+        username: 'test',
+        password: 'test123',
+        deposit: 100,
+      } as User;
+
+      const product = {
+        productName: 'Tea',
+        cost: 20,
+      } as Product;
+
+      user.save = jest.fn();
+      const result = await buyService.buyAction(user, product, 1);
+
+      expect(result).toEqual([20, 100 - 20, product.productName]);
     });
   });
 
