@@ -1,16 +1,10 @@
 import { Injectable, ForbiddenException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import { DepositDto } from './dto';
 import { ROLE, User } from '../database/users.entity';
 
 @Injectable()
 export class DepositService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
-
   async depositCoin(user: User, depositDetails: DepositDto) {
     const { deposit } = depositDetails;
 
