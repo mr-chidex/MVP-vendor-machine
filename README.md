@@ -43,18 +43,12 @@ Task and Features
 - /buy endpoint (accepts productId, amount of products) so users with a “buyer” role can buy a productwith the money they’ve deposited.
 - /reset endpoint so users with a “buyer” role can reset their deposit back to 0
 
----
-
-Tools
-
----
+## Tools
 
 - NestJS
 - Postgres
 - TypeORM
 - Jest
-
----
 
 ## Documentation
 
