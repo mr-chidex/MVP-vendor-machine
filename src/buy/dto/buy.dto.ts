@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsIn, IsNumber } from 'class-validator';
-
-const DEPOSIT_VALUE = [5, 10, 20, 50, 100];
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class BuyDto {
   @IsNotEmpty()
