@@ -51,9 +51,10 @@ export class AuthService {
     //yet to do
 
     if (user.token) {
-      throw new ConflictException(
-        'There is already an active session using your account',
-      );
+      throw new ConflictException({
+        token: user.token,
+        message: 'There is already an active session using your account',
+      });
     }
 
     return;

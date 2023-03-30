@@ -25,6 +25,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userRepository.findOneBy({ username });
     if (!user) throw new UnauthorizedException();
 
+    if (!user.token)
+      throw new UnauthorizedException(
+        "Unauthorized: You don't have an active session, login to proceed",
+      );
+
     return user;
   }
 }

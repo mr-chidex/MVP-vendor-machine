@@ -12,8 +12,8 @@ import {
 import { Product } from './products.entity';
 
 export enum ROLE {
-  BUYER = 'seller',
-  SELLER = 'buyer',
+  BUYER = 'buyer',
+  SELLER = 'seller',
 }
 
 @Entity('users')

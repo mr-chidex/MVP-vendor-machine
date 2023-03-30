@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { typeOrmConfig } from './config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { DepositModule } from './deposit/deposit.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(typeOrmConfig),
     UsersModule,
+    DepositModule,
   ],
   controllers: [],
   providers: [],
