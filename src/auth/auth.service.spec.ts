@@ -1,13 +1,8 @@
-import {
-  ConflictException,
-  UnauthorizedException,
-  BadRequestException,
-} from '@nestjs/common';
+import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import { User } from '../database/users.entity';
 import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto';
@@ -22,7 +17,6 @@ describe('AuthService', () => {
 
   const mockUserRepository = () => ({
     findOneBy: jest.fn(),
-    create: jest.fn(() => ({ save: jest.fn() })),
   });
 
   beforeEach(async () => {
