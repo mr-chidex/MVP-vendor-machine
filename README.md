@@ -22,11 +22,60 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+An API for a vending machine, allowing users with a “seller” role to add, update or remove products, while users with a “buyer” role can deposit coins into the machine and make purchases
 
-## Installation
+---
+
+Task and Features
+
+---
+
+- REST API should be implemented consuming and producing “application/json”
+- Product model with amountAvailable, cost (should be in multiples of 5), productName and sellerId fields
+- User model with username, password, deposit and role fields
+- Authentication method (basic, oAuth, JWT or something else, the choice is yours)
+- All endpoints authenticated unless stated otherwise
+- CRUD for users (POST /user should not require authentication to allow new user registration)
+- CRUD for a product model (GET can be called by anyone, while POST, PUT and DELETE can be called only by the seller user who created the product)
+- /deposit endpoint so users with a “buyer” role can deposit only 5, 10, 20, 50 and 100 cent coins into their vending machine account
+- /buy endpoint (accepts productId, amount of products) so users with a “buyer” role can buy a productwith the money they’ve deposited.
+- /reset endpoint so users with a “buyer” role can reset their deposit back to 0
+
+---
+
+Tools
+
+---
+
+- NestJS
+- Postgres
+- TypeORM
+- Jest
+
+---
+
+## Documentation
+
+Postman: [See documentation](https://documenter.getpostman.com/view/)
+
+---
+
+Clone this project
+
+```
+git clone https://github.com/mr-chidex/MVP-vendor-machine
+```
+
+```
+cd MVP-vendor-machine
+```
+
+## Configure the app
+
+- Create a file named `.env` in the project root directory
+- Add the environment variables as described in the `dev.env` file
 
 ```bash
 $ yarn install
@@ -36,7 +85,7 @@ $ yarn install
 
 ```bash
 # development
-$ yarn run start
+ yarn run start
 
 # watch mode
 $ yarn run start:dev
