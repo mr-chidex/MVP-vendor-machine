@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
@@ -16,6 +20,8 @@ export class AuthService {
 
   async signin(loginCredentials: LoginAuthDto) {
     const user = await this.validateCredentials(loginCredentials);
+
+    this.isUserActive(user);
 
     const payload = { username: user.username };
     const token = this.jwtService.sign(payload);
@@ -38,5 +44,25 @@ export class AuthService {
       throw new UnauthorizedException('username or password is incorrect');
 
     return user;
+  }
+
+  isUserActive(user: User) {
+    //use jwt to verify token expiration time before checking
+    //yet to do
+
+    if (user.token) {
+      throw new ConflictException(
+        'There is already an active session using your account',
+      );
+    }
+
+    return;
+  }
+
+  async logout(user: User) {
+    user.token = null;
+    await user.save();
+
+    return { message: 'logout successful' };
   }
 }
