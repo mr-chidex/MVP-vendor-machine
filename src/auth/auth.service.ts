@@ -1,11 +1,14 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
+  InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
 import { LoginAuthDto } from './dto';
 import { User } from '../database/users.entity';
@@ -47,17 +50,26 @@ export class AuthService {
   }
 
   isUserActive(user: User) {
-    //use jwt to verify token expiration time before checking
-    //yet to do
+    if (!user.token) return;
 
-    if (user.token) {
-      throw new ConflictException({
-        token: user.token,
-        message: 'There is already an active session using your account',
+    //check if token is expired
+    try {
+      jwt.verify(user.token, process.env.JWT_SECRET) as {
+        exp: number;
+      };
+    } catch (error) {
+      if (error.message === 'jwt expired') return;
+
+      throw new BadRequestException({
+        message: error.message,
       });
     }
 
-    return;
+    // if token is not epxpired
+    throw new ConflictException({
+      token: user.token,
+      message: 'There is already an active session using your account',
+    });
   }
 
   async logout(user: User) {
