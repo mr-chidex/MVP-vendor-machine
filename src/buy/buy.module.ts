@@ -8,7 +8,7 @@ import { AuthModule } from '../auth/auth.module';
 import { Product } from '../database/products.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Product]), AuthModule],
+  imports: [TypeOrmModule.forFeature([Product]), AuthModule],
   providers: [BuyService],
   controllers: [BuyController],
 })
