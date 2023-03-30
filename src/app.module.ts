@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { DepositModule } from './deposit/deposit.module';
 import { ResetModule } from './reset/reset.module';
+import { ProductModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ResetModule } from './reset/reset.module';
     UsersModule,
     DepositModule,
     ResetModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],
