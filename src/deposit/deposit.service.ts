@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { DepositDto } from './dto';
-import { User } from '../database/users.entity';
+import { ROLE, User } from '../database/users.entity';
 
 @Injectable()
 export class DepositService {
@@ -23,7 +23,7 @@ export class DepositService {
   }
 
   validateRole(user: User) {
-    if (user.role !== 'buyer') {
+    if (user.role !== ROLE.BUYER) {
       throw new ForbiddenException(
         'Not a buyer. Only "buyers" can make deposit',
       );
